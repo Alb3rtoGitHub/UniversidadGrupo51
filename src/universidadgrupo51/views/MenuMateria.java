@@ -50,7 +50,7 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         jLabel1.setText("Materia");
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jLabel2.setText("Codigo:");
+        jLabel2.setText("Código:");
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel3.setText("Nombre:");
