@@ -144,6 +144,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInscripcionActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll(); //borrar todo lo que haya en el escritorio
+        escritorio.repaint(); //lo vuelva a dibujar
+        GestionInscripcionesView giv = new GestionInscripcionesView(); //instanciar un objeto de nuestra vista
+        giv.setVisible(true); //hago visible esa instancia
+        escritorio.add(giv); //agregamos al escritorio la ventana
+        escritorio.moveToFront(giv); //trae
     }//GEN-LAST:event_menuInscripcionActionPerformed
 
     private void menuAlumXMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlumXMateriaActionPerformed

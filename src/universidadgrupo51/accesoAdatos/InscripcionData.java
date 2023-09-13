@@ -164,24 +164,26 @@ public class InscripcionData {
     }
     
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria){
-        String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?;";
-       
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
-            
-            int fila = ps.executeUpdate();
-            
-            if (fila == 1) {
-                JOptionPane.showMessageDialog(null, "Se borró la Inscripción del Alumno en la Materia");
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que quiere borrar la Inscripción?");
+        if (opcion == 0) {
+            String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?;";
+
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, idAlumno);
+                ps.setInt(2, idMateria);
+
+                int fila = ps.executeUpdate();
+
+                if (fila == 1) {
+                    JOptionPane.showMessageDialog(null, "Se borró la Inscripción del Alumno en la Materia");
+                }
+                ps.close();
+            } catch (SQLException ex) {
+               JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla Inscripción " + ex.getMessage());
             }
-            ps.close();
-        } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla Inscripción " + ex.getMessage());
         }
     }
-    
     public void actualizarNota(int idAlumno, int idMateria, double nota){
         String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?;";
         
