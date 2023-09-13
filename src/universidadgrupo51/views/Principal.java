@@ -140,6 +140,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMateriaActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        MenuMateria mMateria = new MenuMateria();
+        mMateria.setVisible(true);
+        escritorio.add(mMateria);
+        escritorio.moveToFront(mMateria);
     }//GEN-LAST:event_menuMateriaActionPerformed
 
     private void menuInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInscripcionActionPerformed
