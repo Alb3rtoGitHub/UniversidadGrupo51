@@ -5,6 +5,8 @@
  */
 package universidadgrupo51.views;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import universidadgrupo51.accesoAdatos.MateriaData;
 import universidadgrupo51.entidades.Materia;
@@ -37,13 +39,13 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        codigoMateria = new javax.swing.JTextField();
         nombreMateria = new javax.swing.JTextField();
         anioMateria = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        nuevoBoton = new javax.swing.JButton();
+        guardarBoton = new javax.swing.JButton();
+        eliminarBoton = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         estadoTrue = new javax.swing.JRadioButton();
         estadoFalse = new javax.swing.JRadioButton();
@@ -67,9 +69,9 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Estado:");
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        codigoMateria.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        codigoMateria.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        codigoMateria.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         nombreMateria.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
@@ -77,20 +79,30 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         anioMateria.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jButton1.setText("Buscar");
-
-        jButton2.setText("Nuevo");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Guardar");
-        jButton3.setToolTipText("");
-        jButton3.setEnabled(false);
+        nuevoBoton.setText("Nuevo");
+        nuevoBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoBotonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Eliminar");
-        jButton4.setEnabled(false);
+        guardarBoton.setText("Guardar");
+        guardarBoton.setToolTipText("");
+        guardarBoton.setEnabled(false);
+
+        eliminarBoton.setText("Eliminar");
+        eliminarBoton.setEnabled(false);
+        eliminarBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarBotonActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Salir");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -139,13 +151,13 @@ public class MenuMateria extends javax.swing.JInternalFrame {
                             .addComponent(anioMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(codigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton1))
                                 .addComponent(nombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGap(100, 100, 100)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
@@ -153,9 +165,9 @@ public class MenuMateria extends javax.swing.JInternalFrame {
                                 .addGap(20, 20, 20)
                                 .addComponent(estadoFalse))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nuevoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(guardarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -165,7 +177,7 @@ public class MenuMateria extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -182,9 +194,9 @@ public class MenuMateria extends javax.swing.JInternalFrame {
                     .addComponent(estadoFalse))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nuevoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(guardarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
@@ -205,7 +217,7 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void nuevoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBotonActionPerformed
         // Boton Nuevo:
         Materia mat = new Materia();
         if (!"".equals(nombreMateria.getText())){
@@ -234,25 +246,48 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         else{
             JOptionPane.showMessageDialog(null, "Debe ingresar el nombre de la materia.");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_nuevoBotonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        MateriaData matData = new MateriaData();
+        Materia mat = new Materia();
+        
+        mat = matData.buscarMateria(Integer.valueOf(codigoMateria.getText()));
+        nombreMateria.setText(mat.getNombre());
+        anioMateria.setText(String.valueOf(mat.getAnio()));
+        if (mat.isEstado()){
+            estadoTrue.setSelected(true);
+        }
+        else{
+            estadoFalse.setSelected(true);
+        }
+        nuevoBoton.setEnabled(false);
+        guardarBoton.setEnabled(true);
+        eliminarBoton.setEnabled(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void eliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBotonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarBotonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anioMateria;
+    private javax.swing.JTextField codigoMateria;
+    private javax.swing.JButton eliminarBoton;
     private javax.swing.ButtonGroup estado;
     private javax.swing.JRadioButton estadoFalse;
     private javax.swing.JRadioButton estadoTrue;
+    private javax.swing.JButton guardarBoton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nombreMateria;
+    private javax.swing.JButton nuevoBoton;
     // End of variables declaration//GEN-END:variables
 }
