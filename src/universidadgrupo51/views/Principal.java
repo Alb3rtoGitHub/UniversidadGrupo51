@@ -132,10 +132,22 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNotasActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        MenuNotas mNotas = new MenuNotas();
+        mNotas.setVisible(true);
+        escritorio.add(mNotas);
+        escritorio.moveToFront(mNotas);
     }//GEN-LAST:event_menuNotasActionPerformed
 
     private void menuAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlumnoActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        MenuAlumnos menuAlumnos = new MenuAlumnos();
+        menuAlumnos.setVisible(true);
+        escritorio.add(menuAlumnos);
+        escritorio.moveToFront(menuAlumnos);
     }//GEN-LAST:event_menuAlumnoActionPerformed
 
     private void menuMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMateriaActionPerformed
