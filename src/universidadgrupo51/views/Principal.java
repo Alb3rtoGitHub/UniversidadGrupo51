@@ -5,6 +5,7 @@
  */
 package universidadgrupo51.views;
 
+import javax.swing.JOptionPane;
 /**
  *
  * @author Admin
@@ -16,6 +17,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,6 +29,9 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -38,7 +43,14 @@ public class Principal extends javax.swing.JFrame {
         menuNotas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         menuAlumXMateria = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        jmenuSalir = new javax.swing.JMenu();
+        menuSalirPrograma = new javax.swing.JMenuItem();
+
+        jMenu5.setText("jMenu5");
+
+        jMenu6.setText("jMenu6");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo 51");
@@ -111,8 +123,17 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Salir");
-        jMenuBar1.add(jMenu5);
+        jmenuSalir.setText("Salir");
+
+        menuSalirPrograma.setText("Salir del Programa");
+        menuSalirPrograma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalirProgramaActionPerformed(evt);
+            }
+        });
+        jmenuSalir.add(menuSalirPrograma);
+
+        jMenuBar1.add(jmenuSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -172,7 +193,21 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuAlumXMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlumXMateriaActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll(); //borrar todo lo que haya en el escritorio
+        escritorio.repaint(); //lo vuelva a dibujar
+        AlumnosPorMateriaView apm = new AlumnosPorMateriaView(); //instanciar un objeto de nuestra vista
+        apm.setVisible(true); //hago visible esa instancia
+        escritorio.add(apm); //agregamos al escritorio la ventana
+        escritorio.moveToFront(apm); //trae al frente
     }//GEN-LAST:event_menuAlumXMateriaActionPerformed
+
+    private void menuSalirProgramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirProgramaActionPerformed
+        // TODO add your handling code here:
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Desea salir del programa?", "Confirmar salida", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_menuSalirProgramaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,11 +251,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jmenuSalir;
     private javax.swing.JMenuItem menuAlumXMateria;
     private javax.swing.JMenuItem menuAlumno;
     private javax.swing.JMenuItem menuInscripcion;
     private javax.swing.JMenuItem menuMateria;
     private javax.swing.JMenuItem menuNotas;
+    private javax.swing.JMenuItem menuSalirPrograma;
     // End of variables declaration//GEN-END:variables
 }
