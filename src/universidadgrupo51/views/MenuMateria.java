@@ -5,6 +5,7 @@
  */
 package universidadgrupo51.views;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import universidadgrupo51.accesoAdatos.MateriaData;
 import universidadgrupo51.entidades.Materia;
@@ -115,8 +116,18 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         });
 
         buscadorMateria.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        buscadorMateria.setForeground(java.awt.Color.gray);
         buscadorMateria.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        buscadorMateria.setText("Código");
         buscadorMateria.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        buscadorMateria.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                buscadorMateriaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                buscadorMateriaFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,6 +216,7 @@ public class MenuMateria extends javax.swing.JInternalFrame {
                 nombreMateria.setText(mat.getNombre());
                 anioMateria.setText(String.valueOf(mat.getAnio()));
                 buscadorMateria.setText("");
+                colocarPlaceholder(buscadorMateria,"Código");
                 eliminarBoton.setEnabled(true);
 
         }
@@ -296,6 +308,16 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreMateriaActionPerformed
 
+    private void buscadorMateriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscadorMateriaFocusGained
+        // TODO add your handling code here:
+        quitarPlaceholder(buscadorMateria,"Código");
+    }//GEN-LAST:event_buscadorMateriaFocusGained
+
+    private void buscadorMateriaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscadorMateriaFocusLost
+        // TODO add your handling code here:
+        colocarPlaceholder (buscadorMateria,"Código");
+    }//GEN-LAST:event_buscadorMateriaFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anioMateria;
@@ -312,4 +334,18 @@ public class MenuMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField nombreMateria;
     private javax.swing.JButton nuevoBoton;
     // End of variables declaration//GEN-END:variables
+ 
+    private void quitarPlaceholder (javax.swing.JTextField textField,String str){
+        if (textField.getText().equals(str)) {
+            textField.setText("");
+            textField.setForeground(Color.BLACK);
+        }
+    }
+    private void colocarPlaceholder (javax.swing.JTextField textField,String str){
+        if (textField.getText().isEmpty()) {
+            textField.setText(str);
+            textField.setForeground(Color.GRAY);
+        }
+    }
+    
 }

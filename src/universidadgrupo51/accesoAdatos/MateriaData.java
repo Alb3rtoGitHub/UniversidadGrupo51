@@ -66,24 +66,32 @@ public class MateriaData {
     }
 
     public void eliminarMateria(int id) {
-
-        String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ?";
-
-        try {
+        // Consulta que elimina logicamente la materia pero sin tener en cuenta si existe una inscripción
+        //String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ?";
+        
+        //Consulta que no elimina si existe una inscripcion asociada a la materia
+        String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ? AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idMateria = ?)";
+        
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Desea salir eliminar la materia con código "+ id +"?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+           try {
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, id);
+            ps.setInt(1, id); 
+            ps.setInt(2, id);
+            //exito devuelve la cantidad de filas afectadas. Sie es 1 es por que se elimino. si es 0 es por que no se realizo ningun cambio.
             int exito = ps.executeUpdate();
             if (exito == 1) {
-
                 JOptionPane.showMessageDialog(null, "Materia Eliminada");
-
+            }
+            else if(exito==0){
+                JOptionPane.showMessageDialog(null, "No se pudo eliminar la materia. Para eliminar una materia no debe tener una inscripción asociada.");
             }
             ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se ha podido acceder a la tabla de Materia");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "No se ha podido acceder a la tabla de Materia");
+            } 
         }
-
     }
 
     public Materia buscarMateria(int id) {
