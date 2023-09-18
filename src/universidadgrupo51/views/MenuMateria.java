@@ -39,7 +39,7 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         codigoMateria = new javax.swing.JTextField();
         nombreMateria = new javax.swing.JTextField();
         anioMateria = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbtnBuscar = new javax.swing.JButton();
         nuevoBoton = new javax.swing.JButton();
         guardarBoton = new javax.swing.JButton();
         eliminarBoton = new javax.swing.JButton();
@@ -78,10 +78,10 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         anioMateria.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         anioMateria.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtnBuscar.setText("Buscar");
+        jbtnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtnBuscarActionPerformed(evt);
             }
         });
 
@@ -149,7 +149,7 @@ public class MenuMateria extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(buscadorMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
+                                .addComponent(jbtnBuscar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(100, 100, 100)
                                 .addComponent(eliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,7 +173,7 @@ public class MenuMateria extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(codigoMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(jbtnBuscar)
                     .addComponent(buscadorMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -207,37 +207,45 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         eliminarBoton.setEnabled(false);
     }//GEN-LAST:event_nuevoBotonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
         // TODO add your handling code here:
         MateriaData matData = new MateriaData();
         Materia mat = new Materia();
         
-        if (!"".equals(buscadorMateria.getText())){
-            mat = matData.buscarMateria(Integer.valueOf(buscadorMateria.getText()));
-                codigoMateria.setText(String.valueOf(mat.getIdMateria()));
-                nombreMateria.setText(mat.getNombre());
-                anioMateria.setText(String.valueOf(mat.getAnio()));
-                buscadorMateria.setText("");
-                colocarPlaceholder(buscadorMateria,"Código");
-                eliminarBoton.setEnabled(true);
-
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo de materia para buscar.");
-        }
+        // 18/9 Try Catch agregado para evitar si ingreso vacio o letra y evitar cuando traiga una materia que no existe mat = null
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+                mat = matData.buscarMateria(Integer.valueOf(buscadorMateria.getText()));
+                    codigoMateria.setText(String.valueOf(mat.getIdMateria()));
+                    nombreMateria.setText(mat.getNombre());
+                    anioMateria.setText(String.valueOf(mat.getAnio()));
+                    buscadorMateria.setText("");
+                    colocarPlaceholder(buscadorMateria,"Código");
+                    eliminarBoton.setEnabled(true);
+        } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un codigo de materia para buscar.");
+        } catch (NullPointerException npe){
+            buscadorMateria.setText("");
+        }
+    }//GEN-LAST:event_jbtnBuscarActionPerformed
 
     private void eliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBotonActionPerformed
         // TODO add your handling code here:
         int materiaID;
         MateriaData matData = new MateriaData();
-        materiaID = Integer.valueOf(codigoMateria.getText());
-        matData.eliminarMateria(materiaID);
-        codigoMateria.setText("");
-        nombreMateria.setText("");
-        anioMateria.setText("");
         
+        // 18/9 Try Catch agregado para campo codigo vacio si no elimino nada y boton Eliminar esta disponible
+
+        try {
+            materiaID = Integer.valueOf(codigoMateria.getText());
+            matData.eliminarMateria(materiaID);
+            codigoMateria.setText("");
+            nombreMateria.setText("");
+            anioMateria.setText("");
+        } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un codigo de materia para Eliminar.");
+        }
+
 
 
     }//GEN-LAST:event_eliminarBotonActionPerformed
@@ -327,12 +335,12 @@ public class MenuMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField codigoMateria;
     private javax.swing.JButton eliminarBoton;
     private javax.swing.JButton guardarBoton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jbtnBuscar;
     private javax.swing.JTextField nombreMateria;
     private javax.swing.JButton nuevoBoton;
     // End of variables declaration//GEN-END:variables

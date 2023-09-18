@@ -31,7 +31,7 @@ public class MateriaData {
 
             if (rs.next()) {
                 materia.setIdMateria(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Materia Guardado");
+                JOptionPane.showMessageDialog(null, "Materia Guardada");
             }
             ps.close();
 
