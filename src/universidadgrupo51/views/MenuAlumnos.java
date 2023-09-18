@@ -200,8 +200,10 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
         jtfNombre.setEditable(true);
         fechaNacimiento.setEnabled(true);
         botonGuardar.setEnabled(true);
+        estadoActivo.setEnabled(true);
+        estadoNoActivo.setEnabled(true);
         
-        
+        //borrar los datos
         jtfDni.setText("");
         jtfApellido.setText("");
         jtfNombre.setText("");
@@ -219,9 +221,8 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         
-        
-        if(jtfDni.getText()!=null){
-            
+        try{
+
             Alumno alumno=new Alumno();
             AlumnoData alumnoData=new AlumnoData();
 
@@ -236,17 +237,32 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             }else{
                 grupoBotones.setSelected(estadoNoActivo.getModel(), true);
             }
-            
+
             //No poder editar
             jtfApellido.setEditable(false);
             jtfNombre.setEditable(false);
             fechaNacimiento.setEnabled(false);
             botonGuardar.setEnabled(false);
+            estadoActivo.setEnabled(false);
+            estadoNoActivo.setEnabled(false);
+                
             
-        }else{
-            JOptionPane.showMessageDialog(this, "Debe ingresar un dni");
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Debe ingresar un numero de dni valido");
+            //borrar los datos
+            jtfDni.setText("");
+            jtfApellido.setText("");
+            jtfNombre.setText("");
+            grupoBotones.clearSelection();
+            fechaNacimiento.setDate(null);
+        }catch(NullPointerException ex){
+            //borrar los datos
+            jtfDni.setText("");
+            jtfApellido.setText("");
+            jtfNombre.setText("");
+            grupoBotones.clearSelection();
+            fechaNacimiento.setDate(null);
         }
-        
         
     }//GEN-LAST:event_botonBuscarActionPerformed
 
