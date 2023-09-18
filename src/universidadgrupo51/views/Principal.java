@@ -53,7 +53,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Grupo 51");
+        setTitle("Universidad ULP - Grupo 51");
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
@@ -185,17 +185,17 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll(); //borrar todo lo que haya en el escritorio
         escritorio.repaint(); //lo vuelva a dibujar
-        GestionInscripcionesView giv = new GestionInscripcionesView(); //instanciar un objeto de nuestra vista
-        giv.setVisible(true); //hago visible esa instancia
-        escritorio.add(giv); //agregamos al escritorio la ventana
-        escritorio.moveToFront(giv); //trae
+        MenuInscripciones mInscripcion = new MenuInscripciones(); //instanciar un objeto de nuestra vista
+        mInscripcion.setVisible(true); //hago visible esa instancia
+        escritorio.add(mInscripcion); //agregamos al escritorio la ventana
+        escritorio.moveToFront(mInscripcion); //trae
     }//GEN-LAST:event_menuInscripcionActionPerformed
 
     private void menuAlumXMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlumXMateriaActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll(); //borrar todo lo que haya en el escritorio
         escritorio.repaint(); //lo vuelva a dibujar
-        AlumnosPorMateriaView apm = new AlumnosPorMateriaView(); //instanciar un objeto de nuestra vista
+        MenuAlumnosPorMateria apm = new MenuAlumnosPorMateria(); //instanciar un objeto de nuestra vista
         apm.setVisible(true); //hago visible esa instancia
         escritorio.add(apm); //agregamos al escritorio la ventana
         escritorio.moveToFront(apm); //trae al frente

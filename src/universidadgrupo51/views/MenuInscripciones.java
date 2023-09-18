@@ -20,7 +20,7 @@ import universidadgrupo51.entidades.Materia;
  *
  * @author Admin
  */
-public class GestionInscripcionesView extends javax.swing.JInternalFrame {
+public class MenuInscripciones extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo = new DefaultTableModel(){
         @Override
@@ -35,7 +35,7 @@ public class GestionInscripcionesView extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionInscripcionesView
      */
-    public GestionInscripcionesView() {
+    public MenuInscripciones() {
         initComponents();
         cargarCombo();
         armarCabecera();

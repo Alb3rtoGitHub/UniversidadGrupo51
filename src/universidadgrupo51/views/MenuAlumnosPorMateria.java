@@ -16,7 +16,7 @@ import universidadgrupo51.entidades.Materia;
  *
  * @author Admin
  */
-public class AlumnosPorMateriaView extends javax.swing.JInternalFrame {
+public class MenuAlumnosPorMateria extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo = new DefaultTableModel(){
         @Override
@@ -30,7 +30,7 @@ public class AlumnosPorMateriaView extends javax.swing.JInternalFrame {
     /**
      * Creates new form AlumnosPorMateriaView
      */
-    public AlumnosPorMateriaView() {
+    public MenuAlumnosPorMateria() {
         initComponents();
         cargarCombo();
         modelo.setRowCount(0); //establece el número de filas en cero, borra todas las filas existentes en la tabla antes de agregar las nuevas filas
