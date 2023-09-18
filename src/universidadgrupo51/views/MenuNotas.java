@@ -41,6 +41,7 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         initComponents();
         llenarCabecera();
         llenarCombo();
+        modelo.setRowCount(0);
     }
 
     /**
@@ -58,16 +59,18 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         guardar = new javax.swing.JButton();
         salir = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("CARGA DE NOTAS");
+        setClosable(true);
+        setTitle("Gestión de Notas");
 
-        jLabel2.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Seleccione un Alumno ");
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Carga de Notas");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboBoxAlumno.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
-        comboBoxAlumno.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel2.setText("Seleccione un Alumno: ");
+
+        comboBoxAlumno.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         comboBoxAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxAlumnoActionPerformed(evt);
@@ -87,8 +90,7 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tablaNotas);
 
-        guardar.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
-        guardar.setForeground(new java.awt.Color(0, 0, 0));
+        guardar.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         guardar.setText("Guardar");
         guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,8 +98,7 @@ public class MenuNotas extends javax.swing.JInternalFrame {
             }
         });
 
-        salir.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
-        salir.setForeground(new java.awt.Color(0, 0, 0));
+        salir.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         salir.setText("Salir");
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,42 +110,35 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(guardar)
-                        .addGap(131, 131, 131)
-                        .addComponent(salir)
-                        .addGap(56, 56, 56))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(comboBoxAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(202, 202, 202))))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(jLabel1)))
+                .addGap(51, 51, 51)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(comboBoxAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(guardar)
+                        .addGap(109, 109, 109)
+                        .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addComponent(jLabel1)
-                .addGap(21, 21, 21)
-                .addComponent(jLabel2)
-                .addGap(14, 14, 14)
-                .addComponent(comboBoxAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(comboBoxAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardar)
                     .addComponent(salir))

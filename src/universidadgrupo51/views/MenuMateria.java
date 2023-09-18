@@ -47,20 +47,20 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         buscadorMateria = new javax.swing.JTextField();
 
         setClosable(true);
-        setTitle("Gestor de Materias");
+        setTitle("Gestión de Materias");
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Materia");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel2.setText("Código:");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel3.setText("Nombre:");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel4.setText("Año:");
 
         codigoMateria.setEditable(false);
@@ -115,7 +115,7 @@ public class MenuMateria extends javax.swing.JInternalFrame {
             }
         });
 
-        buscadorMateria.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        buscadorMateria.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         buscadorMateria.setForeground(java.awt.Color.gray);
         buscadorMateria.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         buscadorMateria.setText("Código");
@@ -133,7 +133,6 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -161,7 +160,10 @@ public class MenuMateria extends javax.swing.JInternalFrame {
                         .addComponent(nuevoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(guardarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
