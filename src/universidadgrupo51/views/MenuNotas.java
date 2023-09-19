@@ -5,6 +5,7 @@
  */
 package universidadgrupo51.views;
 
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -42,6 +43,7 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         llenarCabecera();
         llenarCombo();
         modelo.setRowCount(0);
+        getContentPane().setBackground(new Color(112, 194, 174));
     }
 
     /**
