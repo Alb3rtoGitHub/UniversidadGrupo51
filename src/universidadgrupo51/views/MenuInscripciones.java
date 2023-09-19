@@ -1,5 +1,6 @@
 package universidadgrupo51.views;
 
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -39,6 +40,7 @@ public class MenuInscripciones extends javax.swing.JInternalFrame {
         initComponents();
         cargarCombo();
         armarCabecera();
+        getContentPane().setBackground(new Color(112, 194, 174));
         
         // Seteo de ancho ce columna de la tabla jtbMaterias y resto mas chico
         jtbMaterias.getColumnModel().getColumn(0).setPreferredWidth(5);

@@ -5,6 +5,7 @@
  */
 package universidadgrupo51.views;
 
+import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo51.accesoAdatos.InscripcionData;
@@ -35,6 +36,7 @@ public class MenuAlumnosPorMateria extends javax.swing.JInternalFrame {
         cargarCombo();
         modelo.setRowCount(0); //establece el número de filas en cero, borra todas las filas existentes en la tabla antes de agregar las nuevas filas
         armarCabecera();
+        getContentPane().setBackground(new Color(112, 194, 174));
         
         // Seteo de ancho ce columna de la tabla jtbMaterias y resto mas chico
         jtbAlumnos.getColumnModel().getColumn(0).setPreferredWidth(5);

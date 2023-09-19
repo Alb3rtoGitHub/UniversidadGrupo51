@@ -21,6 +21,7 @@ public class MenuMateria extends javax.swing.JInternalFrame {
      */
     public MenuMateria() {
         initComponents();
+        getContentPane().setBackground(new Color(112, 194, 174));
     }
 
     /**
