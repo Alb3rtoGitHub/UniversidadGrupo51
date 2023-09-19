@@ -1,22 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package universidadgrupo51.views;
 
+import java.awt.Color;
 import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidadgrupo51.accesoAdatos.AlumnoData;
 import universidadgrupo51.entidades.Alumno;
 
-/**
- *
- * @author Nico
- */
+
 public class MenuAlumnos extends javax.swing.JInternalFrame {
 
     /**
@@ -24,6 +17,7 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
      */
     public MenuAlumnos() {
         initComponents();
+        getContentPane().setBackground(new Color(112, 194, 174));
     }
 
     /**
@@ -256,6 +250,13 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             grupoBotones.clearSelection();
             fechaNacimiento.setDate(null);
         }catch(NullPointerException ex){
+            //habilitar campos
+            jtfApellido.setEditable(true);
+            jtfNombre.setEditable(true);
+            fechaNacimiento.setEnabled(true);
+            botonGuardar.setEnabled(true);
+            estadoActivo.setEnabled(true);
+            estadoNoActivo.setEnabled(true);
             //borrar los datos
             jtfDni.setText("");
             jtfApellido.setText("");
@@ -269,35 +270,65 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         
         try{
-        int dni=Integer.parseInt(jtfDni.getText());
-        String apellido=jtfApellido.getText();
-        String nombre=jtfNombre.getText();
-        LocalDate fechaN = fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        boolean estado=false;
-        if(grupoBotones.isSelected(estadoActivo.getModel())){
-            estado=true;
-        }
-        
-        Alumno alumno=new Alumno(dni,apellido,nombre,fechaN,estado);
-        
-        AlumnoData alumnoData= new AlumnoData();
-        
-        alumnoData.guardarAlumno(alumno);
+            
+            int dni=Integer.parseInt(jtfDni.getText());
+            String apellido=jtfApellido.getText();
+            String nombre=jtfNombre.getText();
+            LocalDate fechaN = fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            boolean estado=false;
+            if(grupoBotones.isSelected(estadoActivo.getModel())){
+                estado=true;
+            }
+
+            Alumno alumno=new Alumno(dni,apellido,nombre,fechaN,estado);
+
+            AlumnoData alumnoData= new AlumnoData();
+
+            alumnoData.guardarAlumno(alumno);
         
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero de DNI sin puntos ni coma");
+            jtfDni.setText("");
+            
         }catch(NullPointerException ex){
-            JOptionPane.showMessageDialog(this, "Debe completar los campos nombre,apellido y fecha valido");
+            JOptionPane.showMessageDialog(this, "Debe completar los campos nombre,apellido,estado y fecha de nacimiento");
         }
         
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         
-        int dniLeido = Integer.parseInt(jtfDni.getText());
-        AlumnoData alumnoData= new AlumnoData();
-        Alumno alumnoBuscado = alumnoData.buscarAlumnoPorDNI(dniLeido);
-        alumnoData.eliminarAlumno(alumnoBuscado.getIdAlumno());
+        try{
+            
+            int dniLeido = Integer.parseInt(jtfDni.getText());
+            AlumnoData alumnoData= new AlumnoData();
+            Alumno alumnoBuscado = alumnoData.buscarAlumnoPorDNI(dniLeido);
+            alumnoData.eliminarAlumno(alumnoBuscado.getIdAlumno());
+
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Debe ingresar un numero de DNI sin puntos ni coma");
+            //borrar los datos
+            jtfDni.setText("");
+            jtfApellido.setText("");
+            jtfNombre.setText("");
+            grupoBotones.clearSelection();
+            fechaNacimiento.setDate(null);
+            
+        }catch(NullPointerException ex){
+            //habilitar campos
+            jtfApellido.setEditable(true);
+            jtfNombre.setEditable(true);
+            fechaNacimiento.setEnabled(true);
+            botonGuardar.setEnabled(true);
+            estadoActivo.setEnabled(true);
+            estadoNoActivo.setEnabled(true);
+            //borrar los datos
+            jtfDni.setText("");
+            jtfApellido.setText("");
+            jtfNombre.setText("");
+            grupoBotones.clearSelection();
+            fechaNacimiento.setDate(null);
+        }
         
     }//GEN-LAST:event_botonEliminarActionPerformed
 
