@@ -45,6 +45,7 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
         botonBuscar = new javax.swing.JButton();
         estadoActivo = new javax.swing.JRadioButton();
         estadoNoActivo = new javax.swing.JRadioButton();
+        botonModificar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Gestión de Alumnos");
@@ -106,14 +107,33 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
         grupoBotones.add(estadoNoActivo);
         estadoNoActivo.setText("No Activo");
 
+        botonModificar.setText("Modificar");
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(titulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(botonNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
@@ -136,19 +156,9 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
                                         .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(jtfApellido))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(botonNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(botonGuardar)
-                        .addGap(17, 17, 17)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonSalir)
-                    .addComponent(botonBuscar))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addComponent(titulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonBuscar)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,18 +186,20 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonNuevo)
                     .addComponent(botonEliminar)
-                    .addComponent(botonSalir)
-                    .addComponent(botonGuardar))
-                .addGap(29, 29, 29))
+                    .addComponent(botonModificar)
+                    .addComponent(botonGuardar)
+                    .addComponent(botonSalir))
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void botonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoActionPerformed
         
         jtfApellido.setEditable(true);
@@ -207,12 +219,14 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_botonNuevoActionPerformed
 
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         
         dispose();
         
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         
         try{
@@ -231,14 +245,6 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             }else{
                 grupoBotones.setSelected(estadoNoActivo.getModel(), true);
             }
-
-            //No poder editar
-            jtfApellido.setEditable(false);
-            jtfNombre.setEditable(false);
-            fechaNacimiento.setEnabled(false);
-            botonGuardar.setEnabled(false);
-            estadoActivo.setEnabled(false);
-            estadoNoActivo.setEnabled(false);
                 
             
         }catch(NumberFormatException ex){
@@ -250,13 +256,6 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             grupoBotones.clearSelection();
             fechaNacimiento.setDate(null);
         }catch(NullPointerException ex){
-            //habilitar campos
-            jtfApellido.setEditable(true);
-            jtfNombre.setEditable(true);
-            fechaNacimiento.setEnabled(true);
-            botonGuardar.setEnabled(true);
-            estadoActivo.setEnabled(true);
-            estadoNoActivo.setEnabled(true);
             //borrar los datos
             jtfDni.setText("");
             jtfApellido.setText("");
@@ -267,6 +266,7 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_botonBuscarActionPerformed
 
+    
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         
         try{
@@ -296,6 +296,7 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_botonGuardarActionPerformed
 
+    
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         
         try{
@@ -315,13 +316,6 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             fechaNacimiento.setDate(null);
             
         }catch(NullPointerException ex){
-            //habilitar campos
-            jtfApellido.setEditable(true);
-            jtfNombre.setEditable(true);
-            fechaNacimiento.setEnabled(true);
-            botonGuardar.setEnabled(true);
-            estadoActivo.setEnabled(true);
-            estadoNoActivo.setEnabled(true);
             //borrar los datos
             jtfDni.setText("");
             jtfApellido.setText("");
@@ -332,11 +326,50 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_botonEliminarActionPerformed
 
+    
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+        
+        try{
+            
+            
+            int dni=Integer.parseInt(jtfDni.getText());
+            String apellido=jtfApellido.getText();
+            String nombre=jtfNombre.getText();
+            LocalDate fechaN = fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            boolean estado=true;
+            if(grupoBotones.isSelected(estadoActivo.getModel())){
+                estado=true;
+            }else if(grupoBotones.isSelected(estadoNoActivo.getModel())){
+                JOptionPane.showMessageDialog(this, "Para dar de baja a un alumno utilice el boton ELIMINAR");
+            }
+            
+                
+            AlumnoData alumnoData= new AlumnoData();
+            
+            int idAlumno=alumnoData.buscarAlumnoPorDNI(dni).getIdAlumno();
+
+            Alumno alumno=new Alumno(idAlumno,dni,apellido,nombre,fechaN,estado);
+
+            alumnoData.modificarAlumno(alumno);
+                
+        
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Debe ingresar un numero de DNI sin puntos ni coma");
+            jtfDni.setText("");
+            
+        }catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(this, "Debe completar los campos nombre,apellido,estado y fecha de nacimiento");
+        }
+        
+        
+    }//GEN-LAST:event_botonModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonEliminar;
     private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonModificar;
     private javax.swing.JButton botonNuevo;
     private javax.swing.JButton botonSalir;
     private javax.swing.JRadioButton estadoActivo;
