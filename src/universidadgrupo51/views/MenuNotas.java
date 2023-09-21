@@ -24,11 +24,15 @@ public class MenuNotas extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
+            return false;
+            /*
+            Para evitar editar columna 0 y 1 pero si la 2.
             if (c == 0 || c == 1) {
                 return false;
             } else {
                 return true;
             }
+            */
         }
     };
 
@@ -164,18 +168,20 @@ public class MenuNotas extends javax.swing.JInternalFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         int filaSelect = tablaNotas.getSelectedRow();
-
+        String NotaStr = JOptionPane.showInputDialog(this, "Ingrese la nota a modificar");
+        
         try {
             if (filaSelect > -1) {
                 
                 Alumno alumSelec = (Alumno) comboBoxAlumno.getSelectedItem();
                 int idAlum = alumSelec.getIdAlumno();
                 int idMat = (Integer) tablaNotas.getValueAt(filaSelect, 0);
-                String NotaStr = tablaNotas.getValueAt(filaSelect, 2).toString();
+                //String NotaStr = tablaNotas.getValueAt(filaSelect, 2).toString(); Cambio, ahora el String de la celda viene de la linea "171".
                 double Nota = Double.parseDouble(NotaStr);
 
                 if (Nota >= 0 && Nota <= 10) {
                     inscriData.actualizarNota(idAlum, idMat, Nota);
+                    completarTabla();
                 } else {
                     JOptionPane.showMessageDialog(this, "Debe escribir un numero comprendido entre 0 y 10");
                     completarTabla();
@@ -188,7 +194,10 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Este campo solo permite valores decimales...");
             completarTabla();
+        } catch (NullPointerException e){
+            JOptionPane.showMessageDialog(this, "Se ha cancelado la edicion");
         }
+        
     }//GEN-LAST:event_guardarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
