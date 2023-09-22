@@ -164,8 +164,8 @@ public class InscripcionData {
     }
     
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria){
-        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que quiere borrar la Inscripción?");
-        if (opcion == 0) {
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea borrar la Inscripción?", "Confirmar Borrar Inscripción", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
             String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?;";
 
             try {
