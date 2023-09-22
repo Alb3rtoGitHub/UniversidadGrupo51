@@ -6,9 +6,15 @@
 package universidadgrupo51.views;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.NumberFormatter;
 import universidadgrupo51.accesoAdatos.AlumnoData;
 import universidadgrupo51.accesoAdatos.InscripcionData;
 import universidadgrupo51.entidades.Alumno;
@@ -24,15 +30,13 @@ public class MenuNotas extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
-            return false;
-            /*
-            Para evitar editar columna 0 y 1 pero si la 2.
+            
             if (c == 0 || c == 1) {
                 return false;
             } else {
                 return true;
             }
-            */
+            
         }
     };
 
@@ -48,6 +52,14 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         llenarCombo();
         modelo.setRowCount(0);
         getContentPane().setBackground(new Color(112, 194, 174));
+        
+        tablaNotas.setRowHeight(25); // Establece la altura en píxeles según tus necesidades
+        
+        /*
+        NUEVO CAMBIO 19/9
+        */
+        // Asignar el editor de celdas personalizado a la columna de notas
+        tablaNotas.getColumnModel().getColumn(2).setCellEditor(new EditorCelda());
     }
 
     /**
@@ -167,24 +179,41 @@ public class MenuNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxAlumnoActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        /*
         int filaSelect = tablaNotas.getSelectedRow();
         String NotaStr = JOptionPane.showInputDialog(this, "Ingrese la nota a modificar");
+        */
+         /*
         
-        try {
-            if (filaSelect > -1) {
+        NUEVO CAMBIO 21/9
+        */
+        if (tablaNotas.isEditing()) {
+            JOptionPane.showMessageDialog(this, "Finaliza la edición de la celda oon ENTER antes de guardar.", "Celda en edición", JOptionPane.WARNING_MESSAGE);
+            return; // No continuar con el proceso de guardado
+        }
+        // Detener la edición de la última celda editada (si la hay)
+        if (tablaNotas.getCellEditor() != null) {
+            tablaNotas.getCellEditor().stopCellEditing();
+        }
+        
+        int filas = tablaNotas.getRowCount();
+        
+        for (int fila = 0; fila < filas; fila++) {
+            
+            try {
+                
+            if (tablaNotas.getSelectedRow() > -1) {
                 
                 Alumno alumSelec = (Alumno) comboBoxAlumno.getSelectedItem();
                 int idAlum = alumSelec.getIdAlumno();
-                int idMat = (Integer) tablaNotas.getValueAt(filaSelect, 0);
-                //String NotaStr = tablaNotas.getValueAt(filaSelect, 2).toString(); Cambio, ahora el String de la celda viene de la linea "171".
+                int idMat = (Integer) tablaNotas.getValueAt(fila, 0);
+                String NotaStr = tablaNotas.getValueAt(fila, 2).toString();
                 double Nota = Double.parseDouble(NotaStr);
 
                 if (Nota >= 0 && Nota <= 10) {
                     inscriData.actualizarNota(idAlum, idMat, Nota);
-                    completarTabla();
                 } else {
                     JOptionPane.showMessageDialog(this, "Debe escribir un numero comprendido entre 0 y 10");
-                    completarTabla();
                 }
 
             } else {
@@ -193,11 +222,11 @@ public class MenuNotas extends javax.swing.JInternalFrame {
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Este campo solo permite valores decimales...");
-            completarTabla();
-        } catch (NullPointerException e){
-            JOptionPane.showMessageDialog(this, "Se ha cancelado la edicion");
         }
-        
+            
+        }
+        JOptionPane.showMessageDialog(this, "Notas Guardadas");
+        completarTabla();
     }//GEN-LAST:event_guardarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
@@ -256,6 +285,31 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         for (Materia mat : inscriData.obtenerMateriasCursadas(alumSelec.getIdAlumno())) {
             double nota = obtenerNotaParaMateria(inscriData.obtenerInscripcionesPorAlumno(alumSelec.getIdAlumno()), mat.getIdMateria());
             modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), nota});
+        }
+    }
+    
+    /*
+        NUEVO CAMBIO 19/9
+    */
+    
+    // Crear un editor de Celda
+    public class EditorCelda extends DefaultCellEditor {
+        private JFormattedTextField textField;
+
+        public EditorCelda() {
+            super(new JFormattedTextField());
+            textField = (JFormattedTextField) getComponent();
+
+            // Configurar el formato para aceptar valores decimales
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+            symbols.setDecimalSeparator('.');
+            DecimalFormat format = new DecimalFormat("#.##", symbols);
+            format.setParseBigDecimal(true);
+            NumberFormatter formatter = new NumberFormatter(format);
+            formatter.setValueClass(Double.class);
+            formatter.setMinimum(0.0);
+            formatter.setMaximum(10.0);
+            textField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(formatter));
         }
     }
 }

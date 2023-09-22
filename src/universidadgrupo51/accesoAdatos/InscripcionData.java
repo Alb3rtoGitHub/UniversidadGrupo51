@@ -196,11 +196,14 @@ public class InscripcionData {
                         
             int exito = ps.executeUpdate();
             
+            /*
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Nota modificada exitosamente");
             } else{
                 JOptionPane.showMessageDialog(null, "Los datos de la Nota no existen");
             }
+            */
+            
             ps.close();
         } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla Inscripción " + ex.getMessage());

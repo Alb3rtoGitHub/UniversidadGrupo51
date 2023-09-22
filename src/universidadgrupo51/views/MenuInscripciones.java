@@ -216,6 +216,8 @@ public class MenuInscripciones extends javax.swing.JInternalFrame {
 
     private void jrdbtnMatNoCursadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrdbtnMatNoCursadasActionPerformed
         // TODO add your handling code here:
+        jbtnBorrarInscripcion.setEnabled(false);
+        jbtnInscribir.setEnabled(true);
         borrarFilas();
         if (jrdbtnMatNoCursadas.isSelected()) {
             List<Materia> materiasNoCursadas = insData.obtenerMateriasNoCursadas(alumnoSeleccionado.getIdAlumno());
@@ -227,6 +229,8 @@ public class MenuInscripciones extends javax.swing.JInternalFrame {
 
     private void jrdbtnMatCursadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrdbtnMatCursadasActionPerformed
         // TODO add your handling code here:
+        jbtnBorrarInscripcion.setEnabled(true);
+        jbtnInscribir.setEnabled(false);
         borrarFilas();
         if (jrdbtnMatCursadas.isSelected()) {
             List<Materia> materiasCursadas = insData.obtenerMateriasCursadas(alumnoSeleccionado.getIdAlumno());
