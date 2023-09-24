@@ -188,7 +188,7 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         NUEVO CAMBIO 21/9
         */
         if (tablaNotas.isEditing()) {
-            JOptionPane.showMessageDialog(this, "Finaliza la edición de la celda oon ENTER antes de guardar.", "Celda en edición", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Finaliza la edición de la celda con ENTER antes de guardar.", "Celda en edición", JOptionPane.WARNING_MESSAGE);
             return; // No continuar con el proceso de guardado
         }
         // Detener la edición de la última celda editada (si la hay)
