@@ -72,7 +72,7 @@ public class MateriaData {
         //Consulta que no elimina si existe una inscripcion asociada a la materia
         String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ? AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idMateria = ?)";
         
-        int opcion = JOptionPane.showConfirmDialog(null, "¿Desea salir eliminar la materia con código "+ id +"?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la materia con código "+ id +"?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
         if (opcion == JOptionPane.YES_OPTION) {
            try {
             PreparedStatement ps = con.prepareStatement(sql);

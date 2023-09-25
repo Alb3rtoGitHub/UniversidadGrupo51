@@ -227,6 +227,11 @@ public class MenuMateria extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debe ingresar un codigo de materia para buscar.");
         } catch (NullPointerException npe){
             buscadorMateria.setText("");
+            colocarPlaceholder (buscadorMateria,"Código");
+            codigoMateria.setText("");
+            nombreMateria.setText("");
+            anioMateria.setText("");
+            
         }
     }//GEN-LAST:event_jbtnBuscarActionPerformed
 
