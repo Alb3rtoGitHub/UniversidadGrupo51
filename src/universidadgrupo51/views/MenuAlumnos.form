@@ -216,6 +216,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfDni">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtfDniMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfApellido">
     </Component>
@@ -261,6 +264,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfId">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtfIdMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonBuscarDni">
       <Properties>
