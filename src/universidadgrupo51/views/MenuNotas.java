@@ -30,13 +30,13 @@ public class MenuNotas extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
-            
+
             if (c == 0 || c == 1) {
                 return false;
             } else {
                 return true;
             }
-            
+
         }
     };
 
@@ -52,12 +52,12 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         llenarCombo();
         modelo.setRowCount(0);
         getContentPane().setBackground(new Color(112, 194, 174));
-        
+
         tablaNotas.setRowHeight(25); // Establece la altura en píxeles según tus necesidades
-        
+
         /*
         NUEVO CAMBIO 19/9
-        */
+         */
         // Asignar el editor de celdas personalizado a la columna de notas
         tablaNotas.getColumnModel().getColumn(2).setCellEditor(new EditorCelda());
     }
@@ -182,11 +182,11 @@ public class MenuNotas extends javax.swing.JInternalFrame {
         /*
         int filaSelect = tablaNotas.getSelectedRow();
         String NotaStr = JOptionPane.showInputDialog(this, "Ingrese la nota a modificar");
-        */
-         /*
+         */
+ /*
         
         NUEVO CAMBIO 21/9
-        */
+         */
         if (tablaNotas.isEditing()) {
             JOptionPane.showMessageDialog(this, "Finaliza la edición de la celda con ENTER antes de guardar.", "Celda en edición", JOptionPane.WARNING_MESSAGE);
             return; // No continuar con el proceso de guardado
@@ -196,37 +196,38 @@ public class MenuNotas extends javax.swing.JInternalFrame {
             tablaNotas.getCellEditor().stopCellEditing();
         }
         
-        int filas = tablaNotas.getRowCount();
+        int filaSelect = tablaNotas.getSelectedRow();
         
-        for (int fila = 0; fila < filas; fila++) {
+        if (filaSelect != -1) {
             
-            try {
-                
-            if (tablaNotas.getSelectedRow() > -1) {
-                
-                Alumno alumSelec = (Alumno) comboBoxAlumno.getSelectedItem();
-                int idAlum = alumSelec.getIdAlumno();
-                int idMat = (Integer) tablaNotas.getValueAt(fila, 0);
-                String NotaStr = tablaNotas.getValueAt(fila, 2).toString();
-                double Nota = Double.parseDouble(NotaStr);
+            int filas = tablaNotas.getRowCount();
+            for (int fila = 0; fila < filas; fila++) {
 
-                if (Nota >= 0 && Nota <= 10) {
-                    inscriData.actualizarNota(idAlum, idMat, Nota);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Debe escribir un numero comprendido entre 0 y 10");
+                try {
+                    
+                        Alumno alumSelec = (Alumno) comboBoxAlumno.getSelectedItem();
+                        int idAlum = alumSelec.getIdAlumno();
+                        int idMat = (Integer) tablaNotas.getValueAt(fila, 0);
+                        String NotaStr = tablaNotas.getValueAt(fila, 2).toString();
+                        double Nota = Double.parseDouble(NotaStr);
+
+                        if (Nota >= 0 && Nota <= 10) {
+                            inscriData.actualizarNota(idAlum, idMat, Nota);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Debe escribir un numero comprendido entre 0 y 10");
+                        }
+                   
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Hubo un error en la fila " + (fila + 1) + ", revisar!");
                 }
 
-            } else {
-                JOptionPane.showMessageDialog(this, "No hay fila seleccionada o no hay materias");
             }
-
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Este campo solo permite valores decimales...");
-        }
+            JOptionPane.showMessageDialog(this, "Notas Guardadas");
+            completarTabla();
             
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay fila seleccionada");
         }
-        JOptionPane.showMessageDialog(this, "Notas Guardadas");
-        completarTabla();
     }//GEN-LAST:event_guardarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
@@ -287,13 +288,13 @@ public class MenuNotas extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), nota});
         }
     }
-    
+
     /*
         NUEVO CAMBIO 19/9
-    */
-    
+     */
     // Crear un editor de Celda
     public class EditorCelda extends DefaultCellEditor {
+
         private JFormattedTextField textField;
 
         public EditorCelda() {
