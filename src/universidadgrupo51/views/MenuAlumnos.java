@@ -97,12 +97,6 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
-        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNombreActionPerformed(evt);
-            }
-        });
-
         botonBuscarId.setText("Buscar");
         botonBuscarId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,7 +259,7 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             Alumno alumno=new Alumno();
             AlumnoData alumnoData=new AlumnoData();
             
-            alumno= alumnoData.buscarAlumno(Integer.parseInt(jtfId.getText()));
+            alumno = alumnoData.buscarAlumno(Integer.parseInt(jtfId.getText()));
                 
             //Cambiar valores
             jtfDni.setText(String.valueOf(alumno.getDni()));
@@ -378,18 +372,17 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             }else if(grupoBotones.isSelected(estadoNoActivo.getModel())){
                 JOptionPane.showMessageDialog(this, "Para dar de baja a un alumno utilice el boton ELIMINAR");
                 grupoBotones.setSelected(estadoActivo.getModel(), true);
+                return;
             }
-            
                 
             AlumnoData alumnoData= new AlumnoData();
+            Alumno alu = alumnoData.buscarAlumnoPorDNI(dni);
             
-            int idAlumno=alumnoData.buscarAlumnoPorDNI(dni).getIdAlumno();
-
-            Alumno alumno=new Alumno(idAlumno,dni,apellido,nombre,fechaN,estado);
-
-            alumnoData.modificarAlumno(alumno);
-                
-        
+            if (alu!= null) {
+                int idAlumno = alu.getIdAlumno();
+                Alumno alumno=new Alumno(idAlumno,dni,apellido,nombre,fechaN,estado);
+                alumnoData.modificarAlumno(alumno);
+            }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero de DNI sin puntos ni coma");
             jtfDni.setText("");
@@ -442,11 +435,6 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_botonBuscarDniActionPerformed
-
-    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNombreActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscarDni;
