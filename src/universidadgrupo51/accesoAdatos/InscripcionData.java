@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import universidadgrupo51.entidades.Alumno;
@@ -234,12 +236,26 @@ public class InscripcionData {
                 alumnos.add(alumno);
             }
             if (alumnos.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "No existen datos para ese idMateria ");
+                JOptionPane.showMessageDialog(null, "No existen Alumnos para ese ID de Materia ");
             }
             ps.close();
         } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla Alumno " + ex.getMessage());
         }
+        Collections.sort(alumnos,comparadorAlumno);
         return alumnos;
     }
+    
+    Comparator<Alumno> comparadorAlumno = new Comparator<Alumno>() {
+        @Override
+        public int compare(Alumno a1, Alumno a2) {
+            // Compara por apellido
+            int comparacionPorApellido = a1.getApellido().compareTo(a2.getApellido());
+            // Si los apellidos son iguales, compara por DNI
+            if (comparacionPorApellido == 0) {
+                return Integer.compare(a1.getDni(), a2.getDni());
+            }
+            return comparacionPorApellido;
+        }
+    };
 }

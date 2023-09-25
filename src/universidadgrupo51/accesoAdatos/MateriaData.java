@@ -3,6 +3,8 @@ package universidadgrupo51.accesoAdatos;
 import universidadgrupo51.entidades.Materia;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -143,7 +145,20 @@ public class MateriaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se ha podido acceder a la tabla de Materia");
         }
-        
+        Collections.sort(ListaMateria,comparadorMateria);
         return ListaMateria;
     }
+    
+    Comparator<Materia> comparadorMateria = new Comparator<Materia>() {
+            @Override
+            public int compare(Materia m1, Materia m2) {
+                int comparacionPorAnio = Integer.compare(m1.getAnio(), m2.getAnio());
+                
+                if (comparacionPorAnio == 0) {
+                    return m1.getNombre().compareTo(m2.getNombre());
+                }
+                
+                return comparacionPorAnio;
+            }
+        };
 }
