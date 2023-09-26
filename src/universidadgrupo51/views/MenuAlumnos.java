@@ -277,7 +277,13 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero de dni o id valido");
             
         }catch(NullPointerException ex){
-            
+            //borrar los datos
+            jtfId.setText("");
+            jtfDni.setText("");
+            jtfApellido.setText("");
+            jtfNombre.setText("");
+            grupoBotones.clearSelection();
+            fechaNacimiento.setDate(null);
         }
        
     }//GEN-LAST:event_botonBuscarIdActionPerformed
@@ -326,7 +332,13 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero de DNI sin puntos ni coma");
             
         }catch(NullPointerException ex){
-            
+            //borrar los datos
+            jtfId.setText("");
+            jtfDni.setText("");
+            jtfApellido.setText("");
+            jtfNombre.setText("");
+            grupoBotones.clearSelection();
+            fechaNacimiento.setDate(null);
         }
         
     }//GEN-LAST:event_botonEliminarActionPerformed
@@ -396,7 +408,13 @@ public class MenuAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero de dni o id valido");
             
         }catch(NullPointerException ex){
-            
+            //borrar los datos
+            jtfId.setText("");
+            jtfDni.setText("");
+            jtfApellido.setText("");
+            jtfNombre.setText("");
+            grupoBotones.clearSelection();
+            fechaNacimiento.setDate(null);
         }
         
     }//GEN-LAST:event_botonBuscarDniActionPerformed
