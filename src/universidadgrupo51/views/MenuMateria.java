@@ -70,11 +70,6 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         codigoMateria.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         nombreMateria.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        nombreMateria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreMateriaActionPerformed(evt);
-            }
-        });
 
         anioMateria.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         anioMateria.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -319,10 +314,6 @@ public class MenuMateria extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_guardarBotonActionPerformed
-
-    private void nombreMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreMateriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreMateriaActionPerformed
 
     private void buscadorMateriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscadorMateriaFocusGained
         // TODO add your handling code here:
